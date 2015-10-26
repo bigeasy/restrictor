@@ -19,10 +19,13 @@
     },
     "dependencies":
     {
-                        "cadence":              "0.4.1"
+                        "abend":                "0.0.2",
+                        "adhere":               "0.0.2",
+                        "turnstile":            "0.0.14"
     },
     "devDependencies":
     {
+                        "cadence":              "0.4.1",
                         "proof":                "0.0.56"
     },
     "scripts":
