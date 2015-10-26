@@ -1,0 +1,32 @@
+{
+    "name":             "restrictor",
+    "version":          "9.9.9",
+    "author":           "Alan Gutierrez <alan@prettyrobots.com>",
+    "description":      "Throttle invocations of an object's asynchronous functions.",
+    "keywords":
+    [
+                        "cadence", "callback", "asynchronous", "queue", "throttle"
+    ],
+    "contributors":     [],
+    "homepage":         "https://github.com/bigeasy/restrictor",
+    "bugs":             "https://github.com/bigeasy/restrictor/issues",
+    "license":          "MIT",
+    "main":             "restrictor",
+    "repository":
+    {
+                        "type": "git",
+                        "url": "http://github.com/bigeasy/restrictor.git"
+    },
+    "dependencies":
+    {
+                        "cadence":              "0.4.1"
+    },
+    "devDependencies":
+    {
+                        "proof":                "0.0.56"
+    },
+    "scripts":
+    {
+                        "test": "proof platform win32 && proof test */*/*.t.js || t/test"
+    }
+}
