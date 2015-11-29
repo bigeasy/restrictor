@@ -21,7 +21,7 @@
     {
                         "abend":                "0.0.3",
                         "adhere":               "0.0.3",
-                        "turnstile":            "0.0.16"
+                        "turnstile":            "0.0.19"
     },
     "devDependencies":
     {
