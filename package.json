@@ -19,7 +19,7 @@
     },
     "dependencies":
     {
-                        "abend":                "0.0.3",
+                        "abend":                "1.0.x",
                         "adhere":               "1.0.x",
                         "turnstile":            "1.0.x"
     },
