@@ -20,7 +20,7 @@
     "dependencies":
     {
                         "abend":                "1.x",
-                        "adhere":               "1.0.x",
+                        "adhere":               "1.x",
                         "turnstile":            "1.0.x"
     },
     "devDependencies":
