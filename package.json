@@ -1,6 +1,6 @@
 {
     "name":             "restrictor",
-    "version":          "1.0.0",
+    "version":          "1.0.1",
     "author":           "Alan Gutierrez <alan@prettyrobots.com>",
     "description":      "Throttle invocations of an object's asynchronous functions.",
     "keywords":
