@@ -1,12 +1,12 @@
 require('proof')(1, require('cadence')(prove))
 
 function prove (async, assert) {
-    var Turnstiles = require('turnstile')
+    var Turnstile = require('turnstile')
     var restrict = require('../..')
     var abend = require('abend')
 
     function Service () {
-        this._turnstiles = new Turnstiles
+        this._turnstile = new Turnstile
     }
 
     Service.prototype.immediate = restrict(function (state, value, callback) {
