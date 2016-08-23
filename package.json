@@ -1,35 +1,38 @@
 {
-    "name":             "restrictor",
-    "version":          "2.0.1",
-    "author":           "Alan Gutierrez <alan@prettyrobots.com>",
-    "description":      "Throttle invocations of an object's asynchronous functions.",
+    "name":                 "restrictor",
+    "version":              "2.0.1",
+    "description":
+
+      "Throttle invocations of an object's asynchronous functions.",
+
     "keywords":
     [
-                        "cadence", "callback", "asynchronous", "queue", "throttle"
+                            "cadence", "callback", "asynchronous", "queue",
+                            "throttle"
     ],
-    "contributors":     [],
-    "homepage":         "https://github.com/bigeasy/restrictor",
-    "bugs":             "https://github.com/bigeasy/restrictor/issues",
-    "license":          "MIT",
-    "main":             "restrictor",
+    "author":               "Alan Gutierrez <alan@prettyrobots.com>",
+    "homepage":             "https://github.com/bigeasy/restrictor",
+    "bugs":                 "https://github.com/bigeasy/restrictor/issues",
+    "license":              "MIT",
     "repository":
     {
-                        "type": "git",
-                        "url": "http://github.com/bigeasy/restrictor.git"
+                            "type": "git",
+                            "url": "http://github.com/bigeasy/restrictor.git"
     },
     "dependencies":
     {
-                        "abend":                "1.x",
-                        "adhere":               "1.x",
-                        "turnstile":            "2.x"
+                            "abend":                        "1.0.x",
+                            "adhere":                       "1.0.x",
+                            "turnstile":                    "2.0.x"
     },
     "devDependencies":
     {
-                        "cadence":              "1.x",
-                        "proof":                "1.x"
+                            "cadence":                      "1.0.x",
+                            "proof":                        "1.1.x"
     },
+    "main":                 "restrictor",
     "scripts":
     {
-                        "test": "proof platform win32 && proof test */*/*.t.js || t/test"
+                            "test": "proof platform win32 && proof test */*/*.t.js || t/test"
     }
 }
