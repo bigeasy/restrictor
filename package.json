@@ -27,7 +27,7 @@
     "devDependencies":
     {
                             "cadence":                      "1.0.x",
-                            "proof":                        "",
+                            "proof":                        "3.0.0",
                             "turnstile":                    "2.1.x"
     },
     "main":                 "restrictor",
