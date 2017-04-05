@@ -1,9 +1,12 @@
-var adhere = require('adhere'),
-    abend = require('abend')
+var adhere = require('adhere')
 
 module.exports = function (method) {
     return adhere(method, function (object, vargs) {
-        object._turnstile.enter({ object: object, method: method }, vargs, vargs.pop())
-        object._turnstile.nudge(abend)
+        object.turnstile.enter({
+            object: object,
+            method: method,
+            body: vargs,
+            completed: vargs.pop()
+        })
     })
 }

@@ -22,13 +22,14 @@
     "dependencies":
     {
                             "abend":                        "1.0.x",
-                            "adhere":                       "1.0.x"
+                            "adhere":                       "1.0.x",
+                            "interrupt":                    "5.0.x"
     },
     "devDependencies":
     {
                             "cadence":                      "1.0.x",
                             "proof":                        "3.0.0",
-                            "turnstile":                    "2.1.x"
+                            "turnstile":                    "2.4.0"
     },
     "main":                 "restrictor",
     "scripts":
