@@ -29,7 +29,7 @@
     {
                             "cadence":                      "1.0.x",
                             "proof":                        "3.0.x",
-                            "turnstile":                    "2.4.0"
+                            "turnstile":                    "2.5.0"
     },
     "main":                 "restrictor",
     "scripts":
