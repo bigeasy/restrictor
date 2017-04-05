@@ -1,6 +1,6 @@
 {
     "name":                 "restrictor",
-    "version":              "2.1.0",
+    "version":              "2.2.0",
     "description":
 
       "Throttle invocations of an object's asynchronous functions.",
