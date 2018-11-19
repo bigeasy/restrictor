@@ -28,7 +28,7 @@
     {
                             "cadence":                      "1.0.x",
                             "proof":                        "3.0.x",
-                            "turnstile":                    "4.8.0"
+                            "turnstile":                    "4.8.2"
     },
     "main":                 "restrictor",
     "scripts":
