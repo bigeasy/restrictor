@@ -30,15 +30,20 @@
 
             </div>
 
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> adhere = <span class="hljs-built_in">require</span>(<span class="hljs-string">'adhere'</span>),
-    abend = <span class="hljs-built_in">require</span>(<span class="hljs-string">'abend'</span>)
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> adhere = <span class="hljs-built_in">require</span>(<span class="hljs-string">'adhere'</span>)
 
 <span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">method</span>) </span>{
     <span class="hljs-keyword">return</span> adhere(method, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">object, vargs</span>) </span>{
-        object._turnstile.enter({ <span class="hljs-attr">object</span>: object, <span class="hljs-attr">method</span>: method }, vargs, vargs.pop())
-        object._turnstile.nudge(abend)
+        object.turnstile.enter({
+            <span class="hljs-attr">object</span>: object,
+            <span class="hljs-attr">method</span>: method,
+            <span class="hljs-attr">body</span>: vargs,
+            <span class="hljs-attr">completed</span>: vargs.pop()
+        })
     })
-}</pre></div></div>
+}
+
+</pre></div></div>
 
         </li>
 
