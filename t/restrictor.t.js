@@ -7,17 +7,19 @@ function prove (async, assert) {
 
     function Service () {
         this.turnstile = new Turnstile
+        this.gathered = []
     }
 
-    Service.prototype.immediate = restrict(function (envelope, callback) {
+    Service.prototype.immediate = restrict.enqueue(function (envelope, callback) {
         callback(null, envelope.body.shift())
     })
 
-    Service.prototype.delayed = restrict(function (envelope, callback) {
+    Service.prototype.delayed = restrict.push(function (envelope, callback) {
+        this.gathered.push(envelope.body.shift())
         setImmediate(callback, null, envelope.body.shift())
     })
 
-    Service.prototype.error = restrict(function (value, callback) {
+    Service.prototype.error = restrict.enqueue(function (value, callback) {
         throw new Error('thrown')
     })
 
@@ -30,11 +32,11 @@ function prove (async, assert) {
     })
 
     async(function () {
-        service.delayed(1, async())
-        service.delayed(2, async())
+        service.delayed(1)
+        service.delayed(2)
         service.immediate(3, async())
-    }, function (one, two, three) {
-        assert([ one, two, three ], [ 1, 2, 3 ], 'service')
+    }, function (immediate) {
+        assert([ service.gathered, immediate ], [ [ 1, 2 ], 3 ], 'service')
     }, [function () {
         service.error(async())
     }, function (error) {
