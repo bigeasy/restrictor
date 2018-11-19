@@ -1,7 +1,7 @@
-require('proof')(1, require('cadence')(prove))
+require('proof')(3, require('cadence')(prove))
 
 function prove (async, assert) {
-    var Turnstile = require('turnstile')
+    var Turnstile = require('turnstile/redux')
     var restrict = require('..')
     var abend = require('abend')
 
@@ -23,13 +23,22 @@ function prove (async, assert) {
 
     var service = new Service
 
+    var wait
+    service.turnstile.listen(function (error) {
+        assert(error.causes[0].message, 'thrown', 'error')
+        wait()
+    })
+
     async(function () {
         service.delayed(1, async())
         service.delayed(2, async())
         service.immediate(3, async())
     }, function (one, two, three) {
         assert([ one, two, three ], [ 1, 2, 3 ], 'service')
-    }, function () {
-        service.error(function () {})
-    })
+    }, [function () {
+        service.error(async())
+    }, function (error) {
+        assert(error.message, 'thrown', 'caught')
+        wait = async()
+    }])
 }
