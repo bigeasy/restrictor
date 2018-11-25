@@ -1,7 +1,7 @@
 require('proof')(3, require('cadence')(prove))
 
 function prove (async, okay) {
-    var Turnstile = require('turnstile/redux')
+    var Turnstile = require('turnstile')
     var restrict = require('..')
     var abend = require('abend')
 
