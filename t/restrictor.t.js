@@ -1,4 +1,4 @@
-require('proof')(4, require('cadence')(prove))
+require('proof')(9, require('cadence')(prove))
 
 function prove (async, okay) {
     var Turnstile = require('turnstile')
@@ -11,11 +11,22 @@ function prove (async, okay) {
         this.count = 0
     }
 
-    Service.prototype.immediate = restrict.enqueue(function (envelope, callback) {
+    Service.prototype.message = restrict.push('message', function (message, socket, callback) {
+        okay({
+            message: message,
+            socket: socket
+        }, {
+            message: {},
+            socket: null
+        }, 'socket')
+        callback()
+    })
+
+    Service.prototype.immediate = restrict.enqueue(function (envelope, value, callback) {
         callback(null, envelope.body.shift())
     })
 
-    Service.prototype.cancelable = restrict.push('canceled', function (envelope, callback) {
+    Service.prototype.cancelable = restrict.push('canceled', function (callback) {
         if (this.count++ == 0) {
             okay('cancellable not canceled')
             callback()
@@ -24,7 +35,7 @@ function prove (async, okay) {
         }
     })
 
-    Service.prototype.delayed = restrict.push(function (envelope, callback) {
+    Service.prototype.delayed = restrict.push(function (envelope, value, callback) {
         this.gathered.push(envelope.body.shift())
         setImmediate(callback, null, envelope.body.shift())
     })
@@ -35,13 +46,19 @@ function prove (async, okay) {
 
     var service = new Service
 
+    okay(service.immediate.length, 2, 'enqueue arity')
+    okay(service.delayed.length, 1, 'push arity')
+    okay(service.cancelable.length, 0, 'unfurled push arity')
+
     var wait
     service.turnstile.listen(function (error) {
+        console.log(error.stack)
         okay(error.causes[0].message, 'thrown', 'error')
         wait()
     })
 
     async(function () {
+        service.message({}, null)
         service.cancelable()
         service.delayed(1)
         service.delayed(2)
@@ -55,5 +72,7 @@ function prove (async, okay) {
         wait = async()
     }], function () {
         service.cancelable()
+        service.message({}, null)
+        service.message({}, { destroy: function () { okay('destroyed') } })
     })
 }
