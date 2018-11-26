@@ -1,10 +1,12 @@
 var adhere = require('adhere')
+var cancellation = require('./cancellation')
 
-module.exports = function (method) {
-    return adhere(method, function (object, vargs) {
+module.exports = function () {
+    var method = cancellation.apply(cancellation, arguments)
+    return adhere(method.original, function (object, vargs) {
         object.turnstile.enter({
             object: object,
-            method: method,
+            method: method.guarded,
             body: vargs,
             completed: vargs.pop()
         })

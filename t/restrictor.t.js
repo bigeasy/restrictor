@@ -1,4 +1,4 @@
-require('proof')(3, require('cadence')(prove))
+require('proof')(4, require('cadence')(prove))
 
 function prove (async, okay) {
     var Turnstile = require('turnstile')
@@ -8,10 +8,20 @@ function prove (async, okay) {
     function Service () {
         this.turnstile = new Turnstile
         this.gathered = []
+        this.count = 0
     }
 
     Service.prototype.immediate = restrict.enqueue(function (envelope, callback) {
         callback(null, envelope.body.shift())
+    })
+
+    Service.prototype.cancelable = restrict.push('canceled', function (envelope, callback) {
+        if (this.count++ == 0) {
+            okay('cancellable not canceled')
+            callback()
+        }  else {
+            callback(new Error('canceled'))
+        }
     })
 
     Service.prototype.delayed = restrict.push(function (envelope, callback) {
@@ -32,6 +42,7 @@ function prove (async, okay) {
     })
 
     async(function () {
+        service.cancelable()
         service.delayed(1)
         service.delayed(2)
         service.immediate(3, async())
@@ -42,5 +53,7 @@ function prove (async, okay) {
     }, function (error) {
         okay(error.message, 'thrown', 'caught')
         wait = async()
-    }])
+    }], function () {
+        service.cancelable()
+    })
 }
